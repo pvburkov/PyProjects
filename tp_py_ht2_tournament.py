@@ -19,8 +19,10 @@ teams = ['FC Spartak Moscow',
          'FC Barcelona']
 
 def match_info(stage, team1, team2, match_score):
-	"""function: makes a dictionary with info
-		about match (teams, score, stage)"""
+    """
+    function: makes a dictionary with info
+    about match (teams, score, stage)
+    """
     info = {}
     info["stage"] = stage
     info["Winner"] = team1
@@ -29,8 +31,10 @@ def match_info(stage, team1, team2, match_score):
     return info
 
 def match(stage, team1, team2):
-	"""function: modelling of the match 
-		between team1 and team2 (uses random)"""
+    """
+    function: modelling of the match 
+    between team1 and team2 (uses random)
+    """
     goals1 = random.randint(0, 5)
     goals2 = random.randint(0, 5)
     if goals1 == goals2:
@@ -72,7 +76,9 @@ def match(stage, team1, team2):
         return match_info(stage, team2, team1, match_score)
 
 def make_stages(num):
-	"""function: generator of stages in tournament"""
+    """
+	function: generator of stages in tournament
+	"""
     for i in range(num, 0, -1):
         if i > 1:
             yield '1/' + str(2 ** (i - 1))
@@ -80,7 +86,9 @@ def make_stages(num):
             yield 'Final'
     
 def tournament(teams):
-	"""function: modelling of the tournament (play-off)"""
+    """
+    function: modelling of the tournament (play-off)
+    """
     my_teams = teams[:]
     tournament = {}
     num_stages = int(log2(len(teams)))
@@ -108,7 +116,9 @@ def tournament(teams):
         my_teams = list(my_teams)
         
     for team in tournament.keys():
-        if len(tournament[team]) == 4 and team == tournament[team][i]["Winner"]:
+	    cond1 = len(tournament[team]) == num_stages
+		cond2 = team == tournament[team][i]["Winner"]
+        if cond1 and cond2:
             winner_output = "The winner of this tournament is "
             winner_output += team + "\n"
             print(winner_output)
@@ -125,8 +135,8 @@ def print_info(team, tournament):
     print(output)
 
 def main():
-    Champions_League = tournament(teams)
-    for team in Champions_League.keys():
-		print_info(team, Champions_League)
+    champions_league = tournament(teams)
+    for team in champions_league.keys():
+        print_info(team, Champions_League)
     
 main()
